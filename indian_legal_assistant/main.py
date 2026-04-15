@@ -23,13 +23,16 @@ def run_assistant(document_content=None, pdf_path=None):
     auditor.tools = [LegalTools.indian_law_lookup]
 
     # Use content from PDF if provided, otherwise use string content
-    if pdf_path and not document_content:
-        # In a real CrewAI flow, the agent would use the tool to read the PDF
-        # We'll pass the path to the task description
-        document_content = f"Please read and analyze the PDF file at: {pdf_path}"
+    if pdf_path:
+        # We tell the analyst to use the PDF tool for the given path
+        task_input = f"PDF File Path: {pdf_path}\n"
+        if document_content:
+            task_input += f"Additional Context: {document_content}"
+    else:
+        task_input = document_content
 
     # Define Tasks
-    extract_info = tasks.extraction_task(analyst, document_content)
+    extract_info = tasks.extraction_task(analyst, task_input)
     research_case = tasks.research_task(expert)
     audit_procedure = tasks.audit_task(auditor)
 

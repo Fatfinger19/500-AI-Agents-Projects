@@ -29,7 +29,15 @@ OPENAI_API_KEY=your_key_here
 ```
 
 ### 3. Running the Assistant
-You can run the main script to see a demonstration with a mock FIR:
+
+#### Streamlit UI (Recommended)
+Launch the professional dashboard:
+```bash
+streamlit run app.py
+```
+
+#### CLI Mode
+Run the main script for a demonstration with a mock FIR:
 ```bash
 python main.py
 ```
